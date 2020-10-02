@@ -3,6 +3,8 @@ package com.dark.mode.demo.resource.v1;
 import com.dark.mode.demo.exception.ResourceNotAcceptableException;
 import com.dark.mode.demo.exception.ResourceNotFoundException;
 import com.dark.mode.demo.model.Student;
+import com.dark.mode.demo.model.StudentDetail;
+import com.dark.mode.demo.service.StudentDetailService;
 import com.dark.mode.demo.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/student")
 public class StudentResource {
     private final StudentService studentService;
+    private final StudentDetailService studentDetailService;
 
     @GetMapping("/all")
     public Iterable<Student> all() {
@@ -23,6 +26,11 @@ public class StudentResource {
     @GetMapping("/{id}")
     public Student find(@PathVariable Integer id) {
         return studentService.getStudentById(id).orElseThrow(() -> new ResourceNotFoundException("Student", "id", id));
+    }
+
+    @GetMapping("/detail/{id}")
+    public StudentDetail findDetail(@PathVariable Integer id) {
+        return studentDetailService.getDetailById(id).orElseThrow(() -> new ResourceNotFoundException("Student detail", "id", id));
     }
 
     @PostMapping("/save")
@@ -40,7 +48,6 @@ public class StudentResource {
         }
         return studentService.updateStudent(s);
     }
-
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
