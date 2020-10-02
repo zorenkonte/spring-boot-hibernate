@@ -7,6 +7,7 @@ import java.util.Optional;
 public interface StudentService {
     Iterable<Student> getAllStudents();
     Optional<Student> getStudentById(Integer id);
+    Student updateStudent(Student s);
     Student saveStudent(Student s);
     void deleteStudent(Student s);
 }

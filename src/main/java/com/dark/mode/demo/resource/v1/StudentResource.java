@@ -1,5 +1,6 @@
 package com.dark.mode.demo.resource.v1;
 
+import com.dark.mode.demo.exception.ResourceNotAcceptableException;
 import com.dark.mode.demo.exception.ResourceNotFoundException;
 import com.dark.mode.demo.model.Student;
 import com.dark.mode.demo.service.StudentService;
@@ -26,8 +27,20 @@ public class StudentResource {
 
     @PostMapping("/save")
     public Student save(@RequestBody Student s) {
+        if (s.getId() != null) {
+            throw new ResourceNotAcceptableException("id", s.getId());
+        }
         return studentService.saveStudent(s);
     }
+
+    @PatchMapping("/update")
+    public Student update(@RequestBody Student s) {
+        if (s.getId() == null) {
+            throw new ResourceNotFoundException("Student", "id", null);
+        }
+        return studentService.updateStudent(s);
+    }
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {

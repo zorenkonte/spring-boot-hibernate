@@ -24,6 +24,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student updateStudent(Student s) {
+        return studentDAO.save(s);
+    }
+
+    @Override
     public Student saveStudent(Student s) {
         return studentDAO.save(s);
     }
