@@ -28,6 +28,11 @@ public class StudentResource {
         return studentService.getStudentById(id).orElseThrow(() -> new ResourceNotFoundException("Student", "id", id));
     }
 
+    @GetMapping("/detail/all")
+    public Iterable<StudentDetail> allDetails() {
+        return studentDetailService.getAllStudentDetails();
+    }
+
     @GetMapping("/detail/{id}")
     public StudentDetail findDetail(@PathVariable Integer id) {
         return studentDetailService.getDetailById(id).orElseThrow(() -> new ResourceNotFoundException("Student detail", "id", id));
@@ -54,5 +59,12 @@ public class StudentResource {
         var s = find(id);
         studentService.deleteStudent(s);
         return new ResponseEntity<>("student deleted", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/detail/delete/{id}")
+    public ResponseEntity<?> deleteDetail(@PathVariable Integer id) {
+        var s = findDetail(id);
+        studentDetailService.deleteDetail(s);
+        return new ResponseEntity<>("student detail deleted", HttpStatus.OK);
     }
 }

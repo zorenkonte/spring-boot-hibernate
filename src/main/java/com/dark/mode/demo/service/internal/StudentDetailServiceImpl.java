@@ -14,7 +14,17 @@ public class StudentDetailServiceImpl implements StudentDetailService {
     private final StudentDetailDAO studentDetailDAO;
 
     @Override
+    public Iterable<StudentDetail> getAllStudentDetails() {
+        return studentDetailDAO.findAll();
+    }
+
+    @Override
     public Optional<StudentDetail> getDetailById(Integer id) {
         return studentDetailDAO.findById(id);
+    }
+
+    @Override
+    public void deleteDetail(StudentDetail s) {
+        studentDetailDAO.delete(s);
     }
 }
