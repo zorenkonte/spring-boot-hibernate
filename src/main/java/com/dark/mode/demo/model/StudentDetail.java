@@ -1,11 +1,8 @@
 package com.dark.mode.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 
 @Data
 @Entity
@@ -18,8 +15,4 @@ public class StudentDetail extends BaseEntity {
     private String contactNumber;
     private String address;
     private String gender; //TODO: convert to enum
-    @ToString.Exclude
-    @JsonIgnoreProperties("studentDetail")
-    @OneToOne(mappedBy = "studentDetail", cascade = CascadeType.ALL)
-    private Student student; //bi-directional
 }
