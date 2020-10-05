@@ -17,6 +17,11 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
+    public Iterable<Subject> getAllSubjectsOrderById() {
+        return subjectDAO.findAllByOrderById();
+    }
+
+    @Override
     public Subject saveSubject(Subject s) {
         return subjectDAO.save(s);
     }

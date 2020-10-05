@@ -17,6 +17,11 @@ public class SubjectResource {
         return subjectService.getAllSubjects();
     }
 
+    @GetMapping("/all/asc/id")
+    public Iterable<Subject> allOrderById() {
+        return subjectService.getAllSubjectsOrderById();
+    }
+
     @PostMapping("/save")
     public Subject save(@RequestBody Subject s) {
         if (s.getId() != null) {
