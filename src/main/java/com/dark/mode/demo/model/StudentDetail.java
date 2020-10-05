@@ -13,13 +13,13 @@ import javax.persistence.OneToOne;
 @AllArgsConstructor
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@JsonIgnoreProperties(value = {"student"})
 public class StudentDetail extends BaseEntity {
     private String email;
     private String contactNumber;
     private String address;
     private String gender; //TODO: convert to enum
     @ToString.Exclude
+    @JsonIgnoreProperties("studentDetail")
     @OneToOne(mappedBy = "studentDetail", cascade = CascadeType.ALL)
     private Student student; //bi-directional
 }
